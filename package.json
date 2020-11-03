@@ -1,0 +1,9 @@
+{
+  "name": "slack-bot",
+  "version": "0.0.1",
+  "main": "app.js",
+  "repository": "git@github.com:AlphaDel/slack-bot.git",
+  "author": "Wuttinan.C",
+  "license": "MIT",
+  "private": true
+}
