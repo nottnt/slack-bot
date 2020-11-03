@@ -40,7 +40,7 @@ app.command('/generate-token-dfl', async ({ command, ack, say }) => {
     }
     const token = await requestAPI({ url: config.REQUEST_TOKEN_URL, data })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
-    say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_POST_URL}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
+    say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_PIN_URL_SLACK}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
   } catch (error) {
     console.log('error: ', error)
   }
@@ -59,7 +59,7 @@ app.command('/generate-token-azd', async ({ command, ack, say }) => {
     }
     const token = await requestAPI({ url: config.REQUEST_TOKEN_URL, data })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
-    say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_POST_URL}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
+    say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_PIN_URL_SLACK}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
   } catch (error) {
     console.log('error: ', error)
   }
@@ -77,7 +77,7 @@ app.command('/delete-sign-azd', async ({ command, ack, respond, say }) => {
     const payload = {
       fieldId: command.text
     }
-    const { isDelete } = await requestAPI({ url: `${config.AZAY_GATEWAY_URL}${config.DELETE_SIGN_AZD_URL}`, data: payload})
+    const { isDelete } = await requestAPI({ url: `${config.BACKEND_APPMAN_URL}${config.DELETE_SIGN_AZD_URL}`, data: payload})
     if (isDelete) {
       say(`<@${command.user_id}> File: \`${payload.fieldId}\` was deleted.`)
     }
