@@ -22,6 +22,10 @@ app.message(':wave:', async ({ message, say }) => {
   await say(`Hello, <@${message.user}>`)
 })
 
+app.message('Hello QA', async ({ message, say }) => {
+  await say(`<@${message.user}> Said Hello <@UG9D410HJ> <@U02CV0F57U5> QA Team Allianz Ayudhya`)
+})
+
 app.command('/release-azd', async ({ command, say, ack, respond }) => {
   await ack()
   await respond({
