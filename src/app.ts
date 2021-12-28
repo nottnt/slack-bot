@@ -39,7 +39,7 @@ app.command('/release-azd', async ({ command, say, ack, respond }) => {
       base,
     })
     if (status === 201) {
-      await say(`:firer2: *The release PR has been created (AZD)* :firer2:\n \`\`\`${base} <- develop\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UJ0LG0LNN> <@UG9D410HJ>`)
+      await say(`:firer2: *The release PR has been created (AZD)* :firer2:\n \`\`\`${base} <- develop\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UG9D410HJ> <@U02CV0F57U5>`)
     }
   } catch (errors) {
     console.error('error: ', errors.message)
@@ -67,7 +67,7 @@ app.command('/release-dfl', async ({ command, say, ack, respond }) => {
       base,
     })
     if (status === 201) {
-      await say(`:firer2: *The release PR has been created (DFL)* :firer2:\n \`\`\`${base} <- development\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UJ0LG0LNN> <@UG9D410HJ>`)
+      await say(`:firer2: *The release PR has been created (DFL)* :firer2:\n \`\`\`${base} <- development\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UG9D410HJ> <@U02CV0F57U5>`)
     }
   } catch (errors) {
     console.error('error: ', errors.message)
@@ -87,7 +87,7 @@ app.command('/generate-token-dfl', async ({ command, ack, say }) => {
       oauth_flag: 'Y',
       client_id: 'AZAYDFL2016UX',
       client_secret: 'c986c721fc563985b17f49676862d4d6fa88770a',
-      version_no: '3.0.0',
+      version_no: '3.20.0',
     }
     const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL, data: payload })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
