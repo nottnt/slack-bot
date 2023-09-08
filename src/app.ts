@@ -67,11 +67,11 @@ app.command('/release-dfl', async ({ command, say, ack, respond }) => {
       owner: 'appman-agm',
       repo: 'azay-dfl-eus',
       title: `🆕 Release ✨${base === 'release' ? 'UAT' : base}✨ version [automatic generated]`,
-      head: 'development',
+      head: 'develop',
       base,
     })
     if (status === 201) {
-      await say(`:firer2: *The release PR has been created (DFL)* :firer2:\n \`\`\`${base} <- development\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UG9D410HJ> <@U02CV0F57U5>`)
+      await say(`:firer2: *The release PR has been created (DFL)* :firer2:\n \`\`\`${base} <- develop\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UG9D410HJ> <@U02CV0F57U5>`)
     }
   } catch (errors) {
     console.error('error: ', errors.message)
@@ -86,14 +86,14 @@ app.command('/generate-token-dfl', async ({ command, ack, say }) => {
   await ack()
   try {
     const payload = {
-      code: 'appman',
-      device_id: '1234567890',
-      oauth_flag: 'Y',
-      client_id: 'AZAYDFL2016UX',
-      client_secret: 'c986c721fc563985b17f49676862d4d6fa88770a',
-      version_no: '3.20.0',
+      password: "8f7279536cff188ba8fe34f8f0dd2027221b6a8a",
+      username: "9999999993",
+      client_secret: "U2FsdGVkX19nutBbSd4ww4eBi2RA6adQj4zIDY8lgab91drbDUIDOUv35MZvFt+W1BgnNte+6WUCQOlL0lPQCTzA6XnQ/bBoC06CD0MZWMs=",
+      client_id: "msub-1",
+      grant_type: "password",
+      version: "3.50.0"
     }
-    const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL, data: payload })
+    const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL_DFL, data: payload })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
     say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_PIN_URL_SLACK}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
   } catch (error) {
@@ -105,14 +105,13 @@ app.command('/generate-token-azd', async ({ command, ack, say }) => {
   await ack()
   try {
     const payload = {
-      code: 'appman',
-      device_id: '1234567890',
-      oauth_flag: 'Y',
-      client_id: 'AZAYAD2016UX',
-      client_secret: '312e97a6efd76341a6950c352b1ed7f894ae6e09',
-      version_no: '1.0.0',
+      password: "123456",
+      username: "9900406",
+      client_secret: "U2FsdGVkX18QMc2lp/gu+ysvXxx/8vGTRa97/1iFQteCdiovjrLh0qwvFqUcIEeCOj1QlqhgyLwzz11yMpzU6JOkH0HkZ43SLSd+PTqWeoM=",
+      client_id: "appman-1",
+      grant_type: "password",
     }
-    const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL, data: payload })
+    const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL_AZD, data: payload })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
     say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_PIN_URL_SLACK}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
   } catch (error) {
