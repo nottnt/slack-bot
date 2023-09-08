@@ -7,6 +7,7 @@ import {
 } from './services'
 import { CreatePullRequest } from './services/github'
 import config from './config'
+import { AzayRequestTokenData } from './types/azay'
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -45,7 +46,7 @@ app.command('/release-azd', async ({ command, say, ack, respond }) => {
     if (status === 201) {
       await say(`:firer2: *The release PR has been created (AZD)* :firer2:\n \`\`\`${base} <- develop\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UG9D410HJ> <@U02CV0F57U5>`)
     }
-  } catch (errors) {
+  } catch (errors: any) {
     console.error('error: ', errors.message)
     await respond({
       text: `\`\`\`😣Oops!😣\n${errors.message}\`\`\``,
@@ -73,7 +74,7 @@ app.command('/release-dfl', async ({ command, say, ack, respond }) => {
     if (status === 201) {
       await say(`:firer2: *The release PR has been created (DFL)* :firer2:\n \`\`\`${base} <- develop\`\`\` ${data.html_url} \nCreated by: <@${command.user_id}> CC: <@UG9D410HJ> <@U02CV0F57U5>`)
     }
-  } catch (errors) {
+  } catch (errors: any) {
     console.error('error: ', errors.message)
     await respond({
       text: `\`\`\`😣Oops!😣\n${errors.message}\`\`\``,
@@ -85,7 +86,7 @@ app.command('/release-dfl', async ({ command, say, ack, respond }) => {
 app.command('/generate-token-dfl', async ({ command, ack, say }) => {
   await ack()
   try {
-    const payload = {
+    const payload: AzayRequestTokenData = {
       password: "8f7279536cff188ba8fe34f8f0dd2027221b6a8a",
       username: "9999999993",
       client_secret: "U2FsdGVkX19nutBbSd4ww4eBi2RA6adQj4zIDY8lgab91drbDUIDOUv35MZvFt+W1BgnNte+6WUCQOlL0lPQCTzA6XnQ/bBoC06CD0MZWMs=",
@@ -96,7 +97,7 @@ app.command('/generate-token-dfl', async ({ command, ack, say }) => {
     const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL_DFL, data: payload })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
     say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_PIN_URL_SLACK}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
-  } catch (error) {
+  } catch (error: any) {
     console.log( error)
   }
 })
@@ -104,7 +105,7 @@ app.command('/generate-token-dfl', async ({ command, ack, say }) => {
 app.command('/generate-token-azd', async ({ command, ack, say }) => {
   await ack()
   try {
-    const payload = {
+    const payload: AzayRequestTokenData = {
       password: "123456",
       username: "9900406",
       client_secret: "U2FsdGVkX18QMc2lp/gu+ysvXxx/8vGTRa97/1iFQteCdiovjrLh0qwvFqUcIEeCOj1QlqhgyLwzz11yMpzU6JOkH0HkZ43SLSd+PTqWeoM=",
@@ -114,7 +115,7 @@ app.command('/generate-token-azd', async ({ command, ack, say }) => {
     const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL_AZD, data: payload })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
     say(`\`\`\`${tokenPretty}\`\`\`\n*Please do not forget to update <${config.TOKEN_PIN_URL_SLACK}|the token post>* :wowwow:<@${command.user_id}>:wowwow:`)
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
   }
 })
@@ -136,7 +137,7 @@ app.command('/delete-sign-azd', async ({ command, ack, respond, say }) => {
     if (isDelete) {
       say(`<@${command.user_id}> File: \`${payload.fieldId}\` was deleted.`)
     }
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message)
     respond({
       text: error.message,
@@ -159,7 +160,7 @@ const ApproveJob = async ({ workflowId, jobName }: { workflowId: string, jobName
       throw new Error(`Job not found (workflow ID: \`${workflowId}\`).`)
     }
     await ApproveJobWithId({ url: `${config.CIRCLECI_API}/workflow/${workflowId}/approve/${jobId}`})
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error.message)
   }
 }
@@ -175,7 +176,7 @@ app.action('action_circleci_approve_azd_release_UAT', async ({ ack, say,respond,
     const { value: workflowId }: { value: string } = (<BlockButtonAction>body).actions[0]
     await ApproveJob({ workflowId, jobName: 'approval_msub' })
     await say(`<@${body.user.id}> Job release to MSUB(UAT) was Approved.`)
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message)
     await respond({
       text: error.message,
@@ -197,7 +198,7 @@ app.action('action_circleci_approve_azd_release_DEV', async ({ ack, say, respond
     const { value: workflowId }: { value: string } = (<BlockButtonAction>body).actions[0]
     await ApproveJob({ workflowId, jobName: 'approval_msub_dev' })
     await say(`<@${body.user.id}> Job release to MSUB(DEV) was Approved.`)
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message)
     await respond({
       text: error.message,
@@ -218,7 +219,7 @@ app.action('action_circleci_approve_azd_release_PA', async ({ ack, say, respond,
     const { value: workflowId }: { value: string } = (<BlockButtonAction>body).actions[0]
     await ApproveJob({ workflowId, jobName: 'approval_msub_pa' })
     await say(`<@${body.user.id}> Job release to MSUB(PA) was Approved.`)
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message)
     await respond({
       text: error.message,

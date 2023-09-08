@@ -1,8 +1,8 @@
 export interface AzayRequestToken {
-  code: string,
-  device_id: string,
-  oauth_flag: string,
+  username: string,
   client_id: string,
   client_secret: string,
-  version_no: string,
+  password: string,
+  grant_type: string,
+  version?: string,
 }
