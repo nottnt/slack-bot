@@ -10,6 +10,8 @@ const config: ConfigData = {
   BACKEND_APPMAN_URL: process.env.BACKEND_APPMAN_URL,
   CIRCLECI_API: 'https://circleci.com/api/v2',
   CIRCLECI_TOKEN: process.env.CIRCLECI_TOKEN,
+  REQUEST_TOKEN_URL_AZD: process.env.REQUEST_TOKEN_URL_AZD,
+  REQUEST_TOKEN_URL_DFL: process.env.REQUEST_TOKEN_URL_DFL,
 }
 
 export default config

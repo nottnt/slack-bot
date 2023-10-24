@@ -1,5 +1,5 @@
 import { App } from '@slack/bolt'
-import { BlockButtonAction, } from '@slack/bolt/dist/types/actions' 
+import { BlockButtonAction } from '@slack/bolt/dist/types/actions' 
 import {
   RequestAPI,
   GetJobIdWithName,
@@ -92,7 +92,7 @@ app.command('/generate-token-dfl', async ({ command, ack, say }) => {
       client_secret: "U2FsdGVkX19nutBbSd4ww4eBi2RA6adQj4zIDY8lgab91drbDUIDOUv35MZvFt+W1BgnNte+6WUCQOlL0lPQCTzA6XnQ/bBoC06CD0MZWMs=",
       client_id: "msub-1",
       grant_type: "password",
-      version: "3.50.0"
+      version: "3.50.0",
     }
     const token = await RequestAPI({ url: config.REQUEST_TOKEN_URL_DFL, data: payload })
     const tokenPretty = JSON.stringify(token, null, 4).trim()
